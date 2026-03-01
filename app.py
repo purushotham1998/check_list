@@ -113,7 +113,7 @@ def create_record():
         "first_name", "last_name", "mobile_number", "age", "sex",
         "locality", "preferred_time_from", "preferred_time_to", "preferred_location",
     ]
-    missing = [f for f in required if not (data.get(f) or "").strip() if f != "age"]
+    missing = [f for f in required if f != "age" and not str(data.get(f, "")).strip()]
     if not data.get("age") and data.get("age") != 0:
         missing.append("age")
     if missing:
