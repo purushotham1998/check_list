@@ -13,6 +13,12 @@ app.config["MAX_CONTENT_LENGTH"] = 10 * 1024 * 1024  # 10MB
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
+DB_NOT_CONFIGURED_MSG = (
+    "Database not configured. Set DATABASE_URL: "
+    "locally use a .env file; on Render add DATABASE_URL in Web Service → Environment "
+    "(use the PostgreSQL service's Internal or External URL)."
+)
+
 
 def _is_local_db(url):
     if not url:
@@ -67,7 +73,7 @@ def health():
 @app.route("/api/records", methods=["GET"])
 def list_records():
     if not DATABASE_URL:
-        return jsonify({"error": "Database not configured. Set DATABASE_URL in .env"}), 503
+        return jsonify({"error": DB_NOT_CONFIGURED_MSG}), 503
     try:
         with get_connection() as conn:
             with conn.cursor() as cur:
@@ -101,7 +107,7 @@ def list_records():
 @app.route("/api/records", methods=["POST"])
 def create_record():
     if not DATABASE_URL:
-        return jsonify({"error": "Database not configured. Set DATABASE_URL in .env"}), 503
+        return jsonify({"error": DB_NOT_CONFIGURED_MSG}), 503
     data = request.get_json(force=True, silent=True) or {}
     required = [
         "first_name", "last_name", "mobile_number", "age", "sex",

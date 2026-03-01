@@ -29,7 +29,78 @@ USER_DETAIL_RECORD/
 
 - Every form submission is stored in the **PostgreSQL** database configured by `DATABASE_URL`.
 - The database **does not reset** when the app restarts or when the Render web service goes to sleep (the database is a separate service and keeps all data).
-- To access your data from anywhere (e.g. when the site is sleeping), use the **External Database URL** from your Render PostgreSQL service dashboard and connect with any PostgreSQL client (psql, DBeaver, etc.).
+
+---
+
+## Fixing "Database not configured"
+
+If you see **"Database not configured. Set DATABASE_URL..."** when submitting the form:
+
+### On Render
+
+1. Open the [Render Dashboard](https://dashboard.render.com).
+2. Open your **Web Service** (the app), then go to **Environment**.
+3. Add an environment variable:
+   - **Key:** `DATABASE_URL`
+   - **Value:** The connection URL of your PostgreSQL database.
+     - If the database is on Render: open your **PostgreSQL** service → copy **Internal Database URL** (for same Render account) or **External Database URL** (for access from your PC or other apps).
+4. Save. Render will redeploy; after that, form submit should work.
+
+If you used a **Blueprint**, the Web Service should already be linked to the database and have `DATABASE_URL` set. If it’s missing, link the database in the service’s **Environment** tab or add `DATABASE_URL` manually with the URL from the PostgreSQL service.
+
+### Running locally
+
+1. Create a `.env` file in the project root (see `.env.example`).
+2. Set `DATABASE_URL` to your PostgreSQL connection string, for example:
+   ```env
+   DATABASE_URL=postgresql://user:password@localhost:5432/user_details
+   ```
+3. If the database is on Render, use the **External Database URL** from the Render PostgreSQL service (so your local app can reach it over the internet).
+
+---
+
+## Accessing the database separately
+
+You can query or export data without using the website.
+
+### 1. Get the connection URL
+
+- **Render:** Open your **PostgreSQL** service in the dashboard.
+  - **Internal Database URL** – use only from another Render service in the same account.
+  - **External Database URL** – use from your computer, pgAdmin, DBeaver, etc. Copy this for local access.
+
+The URL looks like:
+`postgresql://user:password@hostname:5432/database_name`
+
+### 2. Connect with a client
+
+**Option A: Command line (psql)**
+
+- Install [PostgreSQL](https://www.postgresql.org/download/) (includes `psql`), then run:
+  ```bash
+  psql "postgresql://user:password@hostname:5432/database_name"
+  ```
+  Replace with your **External Database URL** from Render (in one string, or split into host/user/db and pass separately).
+
+- Example query:
+  ```sql
+  SELECT * FROM user_records ORDER BY created_at DESC;
+  ```
+
+**Option B: GUI (pgAdmin, DBeaver, etc.)**
+
+1. Create a new PostgreSQL connection.
+2. From the External URL, fill in:
+   - **Host:** from the URL (e.g. `dpg-xxxx.a.oregon-postgres.render.com`)
+   - **Port:** 5432
+   - **Database:** database name (e.g. `user_details`)
+   - **Username / Password:** from the URL (often in the form `user:password` before `@`)
+3. For Render’s External URL, enable **SSL** (e.g. SSL mode “require”).
+4. Connect and open the `user_records` table or run SQL.
+
+**Option C: From another app or script**
+
+Use the same **External Database URL** (with SSL) in any PostgreSQL client library (e.g. Python’s `psycopg2`, Node’s `pg`, etc.). The table name is `user_records`.
 
 ## Deploy on Render
 
