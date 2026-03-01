@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Details Registration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <div class="header-bg" aria-hidden="true"></div>
+      <div class="header-inner">
+        <div class="logo-block">
+          <div class="logo-icon" aria-hidden="true">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="18" r="8" stroke="currentColor" stroke-width="2" fill="none"/>
+              <path d="M8 42c0-8.837 7.163-16 16-16s16 7.163 16 16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <rect x="28" y="8" width="14" height="6" rx="1" stroke="currentColor" stroke-width="2" fill="none"/>
+              <path d="M31 11h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="logo-text">
+            <h1 class="logo">User Details</h1>
+            <p class="tagline">Register your information securely</p>
+          </div>
+        </div>
+        <div class="header-badges">
+          <span class="badge"><svg class="badge-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Secure</span>
+          <span class="badge"><svg class="badge-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Private</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="auth-section" id="auth-section">
+        <div class="login-glass">
+          <div class="login-welcome">
+            <span class="login-logo">User Details</span>
+            <h2 class="login-welcome-title">Welcome back</h2>
+            <p class="login-welcome-text">Sign in to access the registration form. Your details are stored securely and you can manage user records from here.</p>
+          </div>
+          <div class="login-form-wrap">
+            <h2 class="login-form-title">Login</h2>
+            <p class="login-form-subtitle">Sign in to your account</p>
+            <form id="login-form" class="form auth-form" novalidate>
+              <div class="field">
+                <label for="login-username">Username / Email</label>
+                <div class="input-with-icon">
+                  <input type="text" id="login-username" autocomplete="username" placeholder="Enter username" required />
+                  <span class="input-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  </span>
+                </div>
+              </div>
+              <div class="field">
+                <label for="login-password">Password</label>
+                <div class="input-with-icon">
+                  <input type="password" id="login-password" autocomplete="current-password" placeholder="Enter password" required />
+                  <span class="input-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  </span>
+                </div>
+              </div>
+              <div class="auth-error" id="login-error" aria-live="polite"></div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-login" id="login-btn">Sign in</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="form-section card" id="main-section" hidden>
+        <div class="section-head">
+          <span class="section-icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+          </span>
+          <h2 class="form-title">Registration Form</h2>
+        </div>
+        <form id="record-form" class="form" novalidate>
+          <div class="row">
+            <div class="field">
+              <label for="first_name">First name <span class="req">*</span></label>
+              <input type="text" id="first_name" name="first_name" placeholder="Enter first name" autocomplete="given-name" required />
+              <span class="error" aria-live="polite"></span>
+            </div>
+            <div class="field">
+              <label for="last_name">Last name <span class="req">*</span></label>
+              <input type="text" id="last_name" name="last_name" placeholder="Enter last name" autocomplete="family-name" required />
+              <span class="error" aria-live="polite"></span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label for="mobile_number">Mobile number <span class="req">*</span></label>
+              <div class="input-with-prefix">
+                <span class="prefix" aria-hidden="true">+91</span>
+                <input type="tel" id="mobile_number" name="mobile_number" placeholder="e.g. 98765 43210" inputmode="numeric" required />
+              </div>
+              <span class="error" aria-live="polite"></span>
+            </div>
+            <div class="field">
+              <label for="age">Age <span class="req">*</span></label>
+              <input type="number" id="age" name="age" min="1" max="120" placeholder="Age" required />
+              <span class="error" aria-live="polite"></span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Sex <span class="req">*</span></label>
+            <div class="radio-group">
+              <label class="radio-wrap">
+                <input type="radio" name="sex" value="Male" required />
+                <span class="radio-label">Male</span>
+              </label>
+              <label class="radio-wrap">
+                <input type="radio" name="sex" value="Female" />
+                <span class="radio-label">Female</span>
+              </label>
+              <label class="radio-wrap">
+                <input type="radio" name="sex" value="Other" />
+                <span class="radio-label">Other</span>
+              </label>
+            </div>
+            <span class="error" aria-live="polite"></span>
+          </div>
+
+          <div class="field">
+            <label for="locality">Locality <span class="req">*</span></label>
+            <input type="text" id="locality" name="locality" placeholder="City, area or locality" required />
+            <span class="error" aria-live="polite"></span>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label for="preferred_time_from">Preferred date & time (from) <span class="req">*</span></label>
+              <input type="datetime-local" id="preferred_time_from" name="preferred_time_from" required />
+              <span class="error" aria-live="polite"></span>
+            </div>
+            <div class="field">
+              <label for="preferred_time_to">Preferred date & time (to) <span class="req">*</span></label>
+              <input type="datetime-local" id="preferred_time_to" name="preferred_time_to" required />
+              <span class="error" aria-live="polite"></span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="preferred_location">Preferred location <span class="req">*</span></label>
+            <select id="preferred_location" name="preferred_location" required>
+              <option value="">Select area</option>
+              <option value="Madhapur">Madhapur</option>
+              <option value="Manikonda">Manikonda</option>
+              <option value="Kukatpally">Kukatpally</option>
+              <option value="other">Other</option>
+            </select>
+            <input type="text" id="preferred_location_other" class="location-other-input" placeholder="Enter your area" aria-label="Other location" hidden />
+            <span class="error" aria-live="polite"></span>
+          </div>
+
+          <div class="proof-row">
+            <div class="field proof-field">
+              <label>ID proof <span class="optional">optional</span></label>
+              <div class="upload-zone upload-zone-small" id="upload-zone">
+                <input type="file" id="id_proof" name="id_proof" accept=".pdf,.jpg,.jpeg,.png" hidden />
+                <div class="upload-placeholder" id="upload-placeholder">
+                  <svg class="upload-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+                  </svg>
+                  <span class="upload-text">ID proof</span>
+                </div>
+                <div class="upload-preview" id="upload-preview" hidden>
+                  <span class="preview-filename" id="preview-filename"></span>
+                  <button type="button" class="btn-remove-file" id="btn-remove-file" title="Remove">×</button>
+                </div>
+              </div>
+              <div class="preview-area" id="id-preview-area">
+                <div class="preview-content" id="preview-content"></div>
+              </div>
+              <span class="error" aria-live="polite" id="file-error"></span>
+            </div>
+            <div class="field proof-field">
+              <label>Photo proof <span class="optional">optional</span></label>
+              <div class="upload-zone upload-zone-small" id="photo-upload-zone">
+                <input type="file" id="photo_proof" name="photo_proof" accept=".pdf,.jpg,.jpeg,.png" hidden />
+                <div class="upload-placeholder" id="photo-upload-placeholder">
+                  <svg class="upload-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+                  </svg>
+                  <span class="upload-text">Photo proof</span>
+                </div>
+                <div class="upload-preview" id="photo-upload-preview" hidden>
+                  <span class="preview-filename" id="photo-preview-filename"></span>
+                  <button type="button" class="btn-remove-file" id="photo-btn-remove-file" title="Remove">×</button>
+                </div>
+              </div>
+              <div class="preview-area" id="photo-preview-area">
+                <div class="preview-content" id="photo-preview-content"></div>
+              </div>
+              <span class="error" aria-live="polite" id="photo-file-error"></span>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="submit-btn">Submit</button>
+            <button type="reset" class="btn btn-secondary">Clear form</button>
+          </div>
+        </form>
+
+        <div id="success-message" class="success-message" hidden>
+          <p>Your details have been saved successfully.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <svg class="footer-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <p>User Details Registration · Data stored securely in database</p>
+    </footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
