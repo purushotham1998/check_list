@@ -392,7 +392,9 @@ form.addEventListener('submit', async (e) => {
     locationOtherInput.required = false;
     form.mobile_number.value = '';
 
+    // Hide the form and show only the success message
     form.hidden = true;
+    form.style.display = 'none';
     successMessage.hidden = false;
     successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
   } catch (err) {
@@ -405,6 +407,7 @@ form.addEventListener('submit', async (e) => {
 newEntryBtn.addEventListener('click', () => {
   successMessage.hidden = true;
   form.hidden = false;
+  form.style.display = '';
   form.reset();
   clearFilePreview();
   clearPhotoPreview();
