@@ -13,6 +13,7 @@ const loginError = document.getElementById('login-error');
 const form = document.getElementById('record-form');
 const submitBtn = document.getElementById('submit-btn');
 const successMessage = document.getElementById('success-message');
+const newEntryBtn = document.getElementById('new-entry-btn');
 const fileInput = document.getElementById('id_proof');
 const photoFileInput = document.getElementById('photo_proof');
 const locationSelect = document.getElementById('preferred_location');
@@ -381,18 +382,25 @@ form.addEventListener('submit', async (e) => {
       throw new Error(data.error || 'Failed to save');
     }
     successMessage.hidden = false;
-    form.reset();
-    clearFilePreview();
-    clearPhotoPreview();
-    clearErrors();
-    setTimeout(() => {
-      successMessage.hidden = true;
-    }, 5000);
+    successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
   } catch (err) {
     alert(err.message || 'Something went wrong. Please try again.');
   } finally {
     submitBtn.disabled = false;
   }
+});
+
+newEntryBtn.addEventListener('click', () => {
+  successMessage.hidden = true;
+  form.reset();
+  clearFilePreview();
+  clearPhotoPreview();
+  clearErrors();
+  locationOtherInput.hidden = true;
+  locationOtherInput.value = '';
+  locationOtherInput.required = false;
+  form.mobile_number.value = '';
+  form.first_name.focus();
 });
 
 form.addEventListener('reset', () => {
