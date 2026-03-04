@@ -382,6 +382,16 @@ form.addEventListener('submit', async (e) => {
     if (!res.ok) {
       throw new Error(data.error || 'Failed to save');
     }
+    // Clear form state before hiding it
+    form.reset();
+    clearFilePreview();
+    clearPhotoPreview();
+    clearErrors();
+    locationOtherInput.hidden = true;
+    locationOtherInput.value = '';
+    locationOtherInput.required = false;
+    form.mobile_number.value = '';
+
     form.hidden = true;
     successMessage.hidden = false;
     successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
