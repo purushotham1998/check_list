@@ -10,7 +10,10 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Outfit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: radial-gradient(circle at top left, #0f172a 0, #020617 45%, #020617 100%);
+  background:
+    radial-gradient(circle at 0% 0%, #0f172a 0, transparent 55%),
+    radial-gradient(circle at 100% 0%, #111827 0, transparent 55%),
+    radial-gradient(circle at 50% 100%, #020617 0, #020617 55%, #000 100%);
   color: #e5e7eb;
 }
 
@@ -151,10 +154,26 @@ body {
   inset: 0;
   z-index: -1;
   background:
-    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(99, 102, 241, 0.35), transparent),
-    radial-gradient(ellipse 60% 40% at 80% 60%, rgba(59, 130, 246, 0.3), transparent),
-    radial-gradient(ellipse 50% 30% at 50% 90%, rgba(34, 197, 94, 0.2), transparent),
-    radial-gradient(circle at 50% 50%, #0f172a, #020617);
+    radial-gradient(ellipse 80% 50% at 15% 30%, rgba(129, 140, 248, 0.55), transparent),
+    radial-gradient(ellipse 65% 45% at 85% 70%, rgba(56, 189, 248, 0.45), transparent),
+    radial-gradient(ellipse 50% 30% at 50% 100%, rgba(16, 185, 129, 0.28), transparent),
+    radial-gradient(circle at 50% 50%, #020617, #020617 55%, #000 100%);
+  animation: heroGlow 18s ease-in-out infinite alternate;
+}
+
+@keyframes heroGlow {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: hue-rotate(0deg) saturate(1.1);
+  }
+  50% {
+    transform: translate3d(0, -8px, 0) scale(1.02);
+    filter: hue-rotate(25deg) saturate(1.25);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.01);
+    filter: hue-rotate(-15deg) saturate(1.2);
+  }
 }
 
 .login-glass {
@@ -164,14 +183,45 @@ body {
   width: 100%;
   border-radius: 1.25rem;
   overflow: hidden;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(20px);
+  box-shadow:
+    0 28px 70px -24px rgba(15, 23, 42, 0.85),
+    0 0 0 1px rgba(148, 163, 184, 0.35),
+    0 0 40px rgba(56, 189, 248, 0.12);
+  background: radial-gradient(circle at top left, rgba(30, 64, 175, 0.35), rgba(15, 23, 42, 0.96));
+  backdrop-filter: blur(26px) saturate(1.4);
+  position: relative;
+}
+
+.login-glass::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background:
+    linear-gradient(135deg, rgba(129, 140, 248, 0.9), rgba(56, 189, 248, 0.9), rgba(16, 185, 129, 0.9));
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.login-glass:hover {
+  box-shadow:
+    0 32px 80px -24px rgba(15, 23, 42, 0.9),
+    0 0 0 1px rgba(148, 163, 184, 0.5),
+    0 0 55px rgba(56, 189, 248, 0.18);
+  transform: translateY(-2px);
 }
 
 .login-welcome {
   padding: 2rem 1.75rem;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.4), rgba(59, 130, 246, 0.35));
+  background:
+    radial-gradient(circle at 0% 0%, rgba(248, 250, 252, 0.18), transparent 55%),
+    linear-gradient(135deg, rgba(79, 70, 229, 0.85), rgba(37, 99, 235, 0.9));
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -201,8 +251,21 @@ body {
 
 .login-form-wrap {
   padding: 2rem 1.75rem;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
+  background: rgba(15, 23, 42, 0.68);
+  backdrop-filter: blur(22px) saturate(1.5);
+  position: relative;
+}
+
+.login-form-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top, rgba(59, 130, 246, 0.18), transparent 55%),
+    radial-gradient(circle at bottom, rgba(37, 99, 235, 0.12), transparent 55%);
+  mix-blend-mode: screen;
+  opacity: 0.85;
+  pointer-events: none;
 }
 
 .login-form-title {
